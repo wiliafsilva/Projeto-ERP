@@ -1,24 +1,26 @@
+/* Layout Base */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  flex: 1; 
   background-color: #f5f5f5;
+  padding-bottom: 60px; 
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 20px;
+  padding: 1em;
   background-color: #e0e0e0;
   align-items: center;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
 .title {
-  font-size: 24px;
+  font-size: 1.5rem;
   display: flex;
   align-items: flex-end;
   color: black;
@@ -32,21 +34,22 @@
 }
 
 .nome_user {
-  margin-right: 10px;
+  margin-right: 0.5em;
 }
 
 .buttonContainer {
   padding-top: 6%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin-top: 50px;
+  gap: 1em;
+  margin-top: 3em;
 }
 
 .button1, .button2, .button3, .button4 {
-  width: 150px;
-  height: 150px;
+  width: 10em;
+  height: 10em;
   border-radius: 12px;
-  margin: 0 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,25 +83,28 @@
 }
 
 .footer {
-  width: 100%;
-  margin-top: auto;
-  padding: 10px;
-  font-size: 12px;
+  position: fixed; 
+  bottom: 0;      
+  left: 0;
+  width: 100%;      
+  background-color: #e0e0e0;
+  padding: 0.5em;
+  font-size: 0.75rem;
   color: #777;
   text-align: right;
-  background-color: #e0e0e0;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  z-index: 1000;   
 }
 
 .dropdownMenu {
   position: absolute;
-  top: 70px; 
-  right: 0.9%;
+  top: 4em; 
+  right: 1%;
   background-color: white;
   border: 1px solid #cdcdcd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-  padding: 10px;
+  padding: 0.5em;
   z-index: 1000;
   color: black;
   font-weight: bolder;
@@ -111,10 +117,47 @@
 }
 
 .dropdownMenu li {
-  padding: 8px 12px;
+  padding: 0.5em 0.75em;
   cursor: pointer;
 }
 
 .dropdownMenu li:hover {
   background-color: #c2bcbc;
+}
+
+/* Consultas de Mídia */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .button1, .button2, .button3, .button4 {
+    width: 8em;
+    height: 8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userInfo {
+    margin-top: 0.5em;
+  }
+
+  .button1, .button2, .button3, .button4 {
+    width: 6em;
+    height: 6em;
+  }
+
+  .footer {
+    font-size: 0.65rem;
+  }
 }
