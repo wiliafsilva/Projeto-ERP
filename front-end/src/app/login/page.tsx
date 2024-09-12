@@ -20,7 +20,7 @@ const Login = () => {
       {/* Seção da imagem à esquerda */}
       <div className={styles.imageContainer}>
         <Image
-          src="/images/background.jpg" 
+          src="/images/background2.jpg" 
           alt="Estoque"
           layout="fill"
           objectFit="cover"

@@ -7,6 +7,7 @@ import styles from '../style/Home.module.css';
 import { FaDiceD6 } from "react-icons/fa6";
 import Header from '../../../components/header/page';
 import Footer from '../../../components/footer/page';
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const Home: React.FC = () => {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -18,20 +19,48 @@ const Home: React.FC = () => {
     <div className={styles.container}>
       <Header/>
       <div className={styles.buttonContainer}>
-        <button className={styles.button1}>
-          <FaDiceD6 size={70} color='white' />
-        </button>
-        <button className={styles.button2}>
+        <div>
+          <button className={styles.button1} data-tooltip-id="my-tooltip-1">
+            <FaDiceD6 size={70} color='white'/>          
+          </button>   
+          <ReactTooltip
+          id="my-tooltip-1"
+          place="bottom"
+          content="Editar"
+          />       
+        </div>
+        <div> 
+        <button className={styles.button2} data-tooltip-id="my-tooltip-2">
           <FaSearch size={70} />
         </button>
-        <button className={styles.button3}>
+        <ReactTooltip
+          id="my-tooltip-2"
+          place="bottom"
+          content="Pesquisar"
+          />    
+        </div>
+        <div>
+        <button className={styles.button3} data-tooltip-id="my-tooltip-3">
           <FaPlus size={70} />
         </button>
-        <button className={styles.button4}>
+        <ReactTooltip
+          id="my-tooltip-3"
+          place="bottom"
+          content="Adicionar"
+          />       
+        </div>
+        <div>
+        <button className={styles.button4} data-tooltip-id="my-tooltip-4">
           <FaMinus size={70} />
         </button>
+        <ReactTooltip
+          id="my-tooltip-4"
+          place="bottom"
+          content="Excluir"
+          />       
+         </div>
       </div>
-      <Footer/>      
+      <Footer text='Versão 1.0'/>      
     </div>
   );
 };

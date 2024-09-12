@@ -2,10 +2,14 @@
 import React from 'react';
 import styles from '../../src/app/style/Home.module.css'
 
-const Footer = () => {
+interface FooterProps {
+  text: string
+}
+
+const Footer = ({text}: FooterProps) => {
   return (
     <footer className={styles.footer}>
-    <p className='textFooter'>Versão 1.0.0</p>
+    <p className='textFooter'>{text}</p>
   </footer>
   );
 };

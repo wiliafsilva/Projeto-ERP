@@ -10,7 +10,7 @@
 /* Container da Imagem */
 .imageContainer {
   flex: 2;
-  position: relative;  
+  background-attachment: fixed;  
   background-size: cover;
 }
 
