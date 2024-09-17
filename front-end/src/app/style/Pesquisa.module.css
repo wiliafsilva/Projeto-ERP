@@ -1,0 +1,167 @@
+/* Container principal */
+.container {
+  margin: 0px auto;
+  padding: 1rem;
+  background-color: #f5f5f5;    
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-grow: 1;
+  overflow-x: auto;
+}
+
+/* Área de pesquisa */
+.pesquisa {
+  display: flex;
+  flex-direction: column; /* Organiza os itens em uma coluna */
+  margin-bottom: 1rem; 
+  margin-left: 8rem;
+  color: black;  
+}
+
+.label {
+  font-size: 16px;
+  margin-bottom: 0.5rem; /* Adiciona espaço abaixo do rótulo */
+  color: #333;
+  font-weight: bolder; 
+}
+
+.inputPesquisa {
+  padding: 0.2rem;
+  width: 36rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  padding-left: 1rem;
+}
+
+/* Área de Filtros */
+.botoes {
+  padding-left: 8rem;
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+/* Botões de filtro */
+.botao {
+  padding: 0.2rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  font-weight: bolder;
+}
+
+/* Botão especial separado */
+.btnEspecial {
+  background-color: #f95b2c;
+  color: white;
+    
+}
+.botao2 {
+  justify-content: space-between;
+  padding: 0.2rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  font-weight: bolder;  
+  margin-left: 22rem;
+}
+
+.botao:hover {
+  transform: scale(0.95); 
+}
+.botao2:hover {
+  transform: scale(0.95); 
+}
+
+.btnTodos {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.btnVencidos {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btnAVencer {
+  background-color: #f39c12;
+  color: white;
+}
+
+.btnComEstoque {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.btnZerados {
+  background-color: #7f8c8d;
+  color: white;
+}
+
+/* Tabela de produtos */
+.table {   
+  margin-top: 1rem;
+  color: black;
+  
+  margin-right: 100rem;
+  text-align: justify; 
+  width: 100%; 
+  border-collapse: collapse;
+}
+
+.table td {
+  padding: 5px;
+  
+}
+
+.table th, .table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;  
+}
+
+.tableWrapper {
+  margin-right: 8rem;
+  margin-left: 8rem;
+}
+
+/* Estilos para a seção de paginação */
+.paginacao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  color:  black;
+  margin-bottom: 2rem;
+}
+
+.botaoPaginacao {
+  background-color: #698ffa;
+  border: none;
+  color: black;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.1s ease;
+}
+
+.botaoPaginacao:disabled {
+  background-color: #698ffa;
+  cursor: not-allowed;
+  transition: transform 0.1s ease;
+}
+.botaoPaginacao:hover {
+  transform: scale(0.95);
+  background-color: #0847f4; 
+}
+.paginacao span {
+  margin: 0 10px;
+  font-size: 14px;
+}
