@@ -10,11 +10,8 @@ const parseDate = (dateString: string): Date => {
   return new Date(year, month - 1, day);
 };
 
-const formatDate = (date: Date): string => {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+const normalizar = (texto: string): string => {
+  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
 };
 
 const EstoquePage: React.FC = () => {
@@ -37,14 +34,20 @@ const EstoquePage: React.FC = () => {
       const validade = parseDate(produto.validade);
       const diasRestantes = Math.ceil((validade.getTime() - dataServidor.getTime()) / (1000 * 60 * 60 * 24));
 
-      let status: string = produto.status;
+      let status: string;
+      let corValidade: string;
       if (validade < dataServidor) {
         status = 'vencido';
+        corValidade = 'red'; 
       } else if (diasRestantes <= 10) {
         status = 'aVencer';
+        corValidade = 'orange'; 
+      } else {
+        status = 'valido';
+        corValidade = 'green'; 
       }
 
-      return { ...produto, status };
+      return { ...produto, status, corValidade };
     });
 
     const produtosFiltrados = produtosComStatusAtualizado.filter(produto => {
@@ -63,14 +66,26 @@ const EstoquePage: React.FC = () => {
           return false;
       }
     });
-
+    
     const produtosPesquisados = produtosFiltrados.filter(produto =>
-      produto.descricao.toLowerCase().includes(pesquisa.toLowerCase())
+      normalizar(produto.descricao).includes(normalizar(pesquisa))
     );
-
-    const produtosOrdenados = [...produtosPesquisados].sort((a, b) => {
+    
+    const produtosOrdenados = produtosPesquisados.sort((a, b) => {
       const campoA = a[ordem as keyof Produto];
       const campoB = b[ordem as keyof Produto];
+
+      if (ordem === 'validade') {
+        const dataA = parseDate(campoA as string);
+        const dataB = parseDate(campoB as string);
+        return direcaoOrdem === 'asc' ? dataA.getTime() - dataB.getTime() : dataB.getTime() - dataA.getTime();
+      }
+
+      if (ordem === 'compra') {
+        const dataA = parseDate(campoA as string);
+        const dataB = parseDate(campoB as string);
+        return direcaoOrdem === 'asc' ? dataA.getTime() - dataB.getTime() : dataB.getTime() - dataA.getTime();
+      }
 
       if (typeof campoA === 'string' && typeof campoB === 'string') {
         return direcaoOrdem === 'asc' ? campoA.localeCompare(campoB) : campoB.localeCompare(campoA);
@@ -155,11 +170,32 @@ const EstoquePage: React.FC = () => {
             <tbody>
               {produtosPaginated.map((produto) => (
                 <tr key={produto.codigo} data-status={produto.status}>
-                  <td>{produto.codigo}</td>
+                  <td>
+                    <div style={{ 
+                      width: '2px', 
+                      height: '22px', 
+                      backgroundColor: produto.corValidade, 
+                      display: 'inline-block', 
+                      marginRight: '10px', 
+                      borderRadius: '20px' 
+                    }}></div>
+                    {produto.codigo}
+                  </td>
                   <td>{produto.descricao}</td>
                   <td>{produto.compra}</td>
                   <td>{produto.validade}</td>
-                  <td>{produto.quantidade}</td>
+                  <td style={{ position: 'relative' }}>                     
+                    {produto.quantidade}
+                    <div style={{ 
+                      width: '2px', 
+                      height: '22px', 
+                      backgroundColor: produto.corValidade, 
+                      position: 'absolute', 
+                      right: 2, 
+                      top: 8, 
+                      borderRadius: '20px',                       
+                    }}></div>
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -1,7 +1,7 @@
 /* Container principal */
 .container {
   margin: 0px auto;
-  padding: 1rem;
+  padding: 2vh 16vw;
   background-color: #f5f5f5;    
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex-grow: 1;
@@ -11,15 +11,14 @@
 /* Área de pesquisa */
 .pesquisa {
   display: flex;
-  flex-direction: column; /* Organiza os itens em uma coluna */
-  margin-bottom: 1rem; 
-  margin-left: 8rem;
+  flex-direction: column; 
+  margin-bottom: 1rem;  
   color: black;  
 }
 
 .label {
   font-size: 16px;
-  margin-bottom: 0.5rem; /* Adiciona espaço abaixo do rótulo */
+  margin-bottom: 0.5rem; 
   color: #333;
   font-weight: bolder; 
 }
@@ -35,9 +34,7 @@
 
 /* Área de Filtros */
 .botoes {
-  padding-left: 8rem;
   display: flex;
-  flex-wrap: wrap; 
   gap: 0.4rem;
   margin-bottom: 1rem;
 }
@@ -48,6 +45,7 @@
   border: none;
   border-radius: 8px;
   font-size: 14px;
+  text-wrap: nowrap;
   cursor: pointer;
   transition: transform 0.1s ease;
   font-weight: bolder;
@@ -55,6 +53,7 @@
 
 /* Botão especial separado */
 .btnEspecial {
+  margin-left: auto;
   background-color: #f95b2c;
   color: white;
     
@@ -68,7 +67,6 @@
   cursor: pointer;
   transition: transform 0.1s ease;
   font-weight: bolder;  
-  margin-left: 22rem;
 }
 
 .botao:hover {
@@ -125,11 +123,6 @@
   border-bottom: 1px solid #ddd;  
 }
 
-.tableWrapper {
-  margin-right: 8rem;
-  margin-left: 8rem;
-}
-
 /* Estilos para a seção de paginação */
 .paginacao {
   display: flex;
@@ -138,6 +131,7 @@
   margin-top: 20px;
   color:  black;
   margin-bottom: 2rem;
+  font-weight: bolder;
 }
 
 .botaoPaginacao {
@@ -145,7 +139,7 @@
   border: none;
   color: black;
   padding: 10px 15px;
-  margin: 0 5px;
+  margin: 0 2px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
@@ -164,4 +158,13 @@
 .paginacao span {
   margin: 0 10px;
   font-size: 14px;
+}
+
+.table th {
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.table th:hover {
+  background-color: rgba(0, 0, 0, 0.1); 
 }
