@@ -16,6 +16,10 @@
   }
 }
 
+* {
+  max-width: 100vw;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -40,4 +44,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh; 
+}
+html, body {
+  overflow-x: auto; 
+  overflow-y: auto; 
 }
