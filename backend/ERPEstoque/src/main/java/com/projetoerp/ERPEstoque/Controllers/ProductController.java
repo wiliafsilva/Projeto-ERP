@@ -23,4 +23,5 @@ public class ProductController {
         List<Product> produtos = productRepository.findAll();
         return ResponseEntity.ok(produtos);
     }
+    
 }
