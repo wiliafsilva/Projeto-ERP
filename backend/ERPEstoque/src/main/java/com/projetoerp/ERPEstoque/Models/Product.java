@@ -15,29 +15,25 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome",nullable = false)
-    private String nome;
-
     @Column(name = "descricao",nullable = false)
     private String descricao;
 
-    @Column(name = "tipo",nullable = false)
-    private String tipo;
-
-    @Column(name = "createdAt")
+    @Column(name = "compra",nullable = false)
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private LocalDateTime data_de_compra;
 
-    @Column(name = "validade")
+    @Column(name = "validade",nullable = false)
     private LocalDateTime data_de_validade;
 
-    public Product(Long id, String descricao, String nome, String tipo, LocalDateTime data_de_validade, LocalDateTime createdAt) {
+    @Column(name = "quantidade",nullable = false)
+    private int quantidade;
+
+    public Product(Long id, String descricao, LocalDateTime data_de_compra, LocalDateTime data_de_validade, int quantidade) {
         this.id = id;
         this.descricao = descricao;
-        this.nome = nome;
-        this.tipo = tipo;
+        this.data_de_compra = data_de_compra;
         this.data_de_validade = data_de_validade;
-        this.createdAt = createdAt;
+        this.quantidade = quantidade;
     }
 
     public Product() {
@@ -51,14 +47,6 @@ public class Product {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -67,20 +55,20 @@ public class Product {
         this.descricao = descricao;
     }
 
-    public String getTipo() {
-        return tipo;
+    public LocalDateTime getData_de_compra() {
+        return data_de_compra;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setData_de_compra(LocalDateTime data_de_compra) {
+        this.data_de_compra = data_de_compra;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     public LocalDateTime getData_de_validade() {
@@ -96,11 +84,11 @@ public class Product {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Product product = (Product) object;
-        return Objects.equals(id, product.id) && Objects.equals(nome, product.nome) && Objects.equals(descricao, product.descricao) && Objects.equals(tipo, product.tipo) && Objects.equals(createdAt, product.createdAt) && Objects.equals(data_de_validade, product.data_de_validade);
+        return quantidade == product.quantidade && Objects.equals(id, product.id) && Objects.equals(descricao, product.descricao) && Objects.equals(data_de_compra, product.data_de_compra) && Objects.equals(data_de_validade, product.data_de_validade);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, descricao, tipo, createdAt, data_de_validade);
+        return Objects.hash(id, descricao, data_de_compra, data_de_validade, quantidade);
     }
 }
