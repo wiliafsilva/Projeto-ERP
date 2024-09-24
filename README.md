@@ -23,7 +23,5 @@ O projeto é uma aplicação web que permite o gerenciamento eficiente de estoqu
 ## Funcionalidades
 
 - **Gerenciamento de Produtos**: Adicionar, editar e remover produtos do estoque.
-- **Gerenciamento de Categorias**: Organizar produtos em categorias para melhor visualização.
-- **Gerenciamento de Fornecedores**: Manter um registro dos fornecedores de produtos.
 - **Autenticação de Usuário**: Sistema de login para acesso restrito às funcionalidades.
 - **Interface Intuitiva**: UX/UI moderna e responsiva para facilitar a navegação.
