@@ -1,0 +1,255 @@
+/* Container principal */
+.container {
+    margin: 0px auto;
+    padding: 2vh 16vw;
+    background-color: #f5f5f5;    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    overflow-x: auto;
+  }
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #ccc;
+  }
+  
+.title_h2 {
+    font-size: 24px;
+    color: black;
+  }
+
+.FaTrash {
+    padding: 15px 10px;
+    cursor: pointer;
+    color: red;
+    margin-left: 5px;
+}
+
+.FaTrash :hover {
+    color: darkred;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.confirmButton, .cancelButton {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.confirmButton {
+  background-color: red;
+  color: white;
+  border-radius: 8px;
+}
+
+.cancelButton {
+  background-color: grey;
+  color: white;
+  border-radius: 8px;
+}
+
+.notificacao {
+  background-color: rgb(218, 2, 74);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+  /* Área de pesquisa */
+  .pesquisa {
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 1rem;  
+    color: black;  
+  }
+  
+  .label {
+    font-size: 16px;
+    margin-bottom: 0.5rem; 
+    color: #333;
+    font-weight: bolder; 
+  }
+  
+  .inputPesquisa {
+    padding: 0.2rem;
+    width: 36rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding-left: 1rem;
+  }
+  
+  /* Área de Filtros */
+  .botoes {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Botões de filtro */
+  .botao {
+    padding: 0.2rem 0.9rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    text-wrap: nowrap;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    font-weight: bolder;
+  }
+  
+  /* Botão especial separado */
+  .btnEspecial {
+    margin-left: auto;
+    background-color: #f95b2c;
+    color: white;
+      
+  }
+  .botao2 {
+    justify-content: space-between;
+    padding: 0.2rem 0.9rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    font-weight: bolder;  
+  }
+  
+  .botao:hover {
+    transform: scale(0.95); 
+  }
+  .botao2:hover {
+    transform: scale(0.95); 
+  }
+  
+  .btnTodos {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  .btnVencidos {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .btnAVencer {
+    background-color: #f39c12;
+    color: white;
+  }
+  
+  .btnComEstoque {
+    background-color: #2ecc71;
+    color: white;
+  }
+  
+  .btnZerados {
+    background-color: #7f8c8d;
+    color: white;
+  }
+  
+  /* Tabela de produtos */
+  .table {   
+    margin-top: 1rem;
+    color: black;
+    
+    margin-right: 100rem;
+    text-align: justify; 
+    width: 100%; 
+    border-collapse: collapse;
+  }
+  
+  .table td {
+    padding: 5px;
+    
+  }
+  
+  .table th, .table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;  
+  }
+  
+  /* Estilos para a seção de paginação */
+  .paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    color:  black;
+    margin-bottom: 2rem;
+    font-weight: bolder;
+  }
+  
+  .botaoPaginacao {
+    background-color: #698ffa;
+    border: none;
+    color: black;
+    padding: 10px 15px;
+    margin: 0 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 0.1s ease;
+  }
+  
+  .botaoPaginacao:disabled {
+    background-color: #698ffa;
+    cursor: not-allowed;
+    transition: transform 0.1s ease;
+  }
+  .botaoPaginacao:hover {
+    transform: scale(0.95);
+    background-color: #0847f4; 
+  }
+  .paginacao span {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  
+  .table th {
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .table th:hover {
+    background-color: rgba(0, 0, 0, 0.1); 
+  }
+  
