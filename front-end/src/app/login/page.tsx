@@ -31,7 +31,7 @@ const Login = () => {
       <div className={styles.formContainer}>
         <div className={styles.header}>
           <div className={styles.title}>
-            <TiShoppingCart size={70} color="black" /> {/* Ícone de carrinho */}
+            <TiShoppingCart size={70} color="white" /> {/* Ícone de carrinho */}
             <span className={styles.titleText}>Gerenciador De Estoque</span>
           </div>
           <h2 className={styles.login}>Login</h2>
@@ -62,7 +62,7 @@ const Login = () => {
           </div>
 
           <div className={styles.forgotPassword}>
-            <a href="#">Esqueci minha senha</a>
+            <a href="#">Suporte Técnico</a>
           </div>
 
           <button type="submit" className={styles.submitButton}>

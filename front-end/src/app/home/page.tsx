@@ -4,7 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { FaSearch, FaPlus, FaMinus } from 'react-icons/fa';
 import styles from '../style/Home.module.css'; 
-import { FaDiceD6 } from "react-icons/fa6";
+import { FaPencilAlt } from "react-icons/fa";
 import Header from '../../../components/header/page';
 import Footer from '../../../components/footer/page';
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
       <div className={styles.buttonContainer}>
         <div>
           <button className={styles.button1} data-tooltip-id="my-tooltip-1">
-            <FaDiceD6 size={70} color='white'/>          
+            <FaPencilAlt size={70} color='white'/>          
           </button>   
           <ReactTooltip
           id="my-tooltip-1"
