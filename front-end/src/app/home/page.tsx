@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   return (
     <div className={styles.container}>
       <Header/>
-      <div className={styles.buttonContainer}>
+      <div className={`${styles.buttonContainer} flex justify-center items-center h-full`}>
         <div>
           <button className={styles.button1} data-tooltip-id="my-tooltip-1">
             <FaPencilAlt size={70} color='white'/>          
