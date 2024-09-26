@@ -128,15 +128,15 @@ const AdicionarPage: React.FC = () => {
             <h2 className={styles.title_h2}>Adicionar Produto</h2>
         </div>
         <div className={styles.pesquisa}>
-          <div>
-          <span className={styles.label}>Pesquisar:</span>
-          <input
-            type="text"
-            className={styles.inputPesquisa}
-            placeholder="Nome do Produto"
-            value={pesquisa}
-            onChange={(e) => setPesquisa(e.target.value)}
-          />
+          <div className='flex'>
+            <span className={styles.label}>Pesquisar:</span>
+            <input
+              type="text"
+              className={styles.inputPesquisa}
+              placeholder="Nome do Produto"
+              value={pesquisa}
+              onChange={(e) => setPesquisa(e.target.value)}
+            />
             <button className={styles.botaoAdicionar}>Adicionar</button>
           </div>
         </div>
