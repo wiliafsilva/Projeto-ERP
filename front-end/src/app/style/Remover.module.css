@@ -23,14 +23,9 @@
   }
 
 .FaTrash {
-    padding: 15px 10px;
     cursor: pointer;
     color: red;
     margin-left: 5px;
-}
-
-.FaTrash :hover {
-    color: darkred;
 }
 
 .modal {
