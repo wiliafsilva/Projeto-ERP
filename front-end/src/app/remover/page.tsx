@@ -220,8 +220,7 @@ const RemoverPage: React.FC = () => {
                   <td>{produto.quantidade}</td>
                   <td>
                     <div 
-                      className={styles.FaTrash} 
-                      style={{ cursor: 'pointer', padding: '0 5px' }} 
+                      className={`flex justify-center items-center ${styles.FaTrash} px-2 py-2 pointer hover:text-red-800`}
                       onClick={() => confirmarExclusao(produto)}
                     >
                       <FaTrashAlt />
