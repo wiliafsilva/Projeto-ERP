@@ -1,19 +1,22 @@
 package com.projetoerp.ERPEstoque.Config;
 
-import org.springdoc.core.GroupedOpenApi;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
 
+@OpenAPIDefinition(info = @Info(title = "BackEnd do Projeto ERP",version = "v0.0.1",description = "Documentação do projeto ERP Estoque de Mercado" ))
 public class SwaggerConfig {
 
     @Bean
-    public GroupedOpenApi api() {
-        return GroupedOpenApi.builder()
-                .group("ERPEstoque Back-End")
-                .group("Versão 0.1.1")
-                .packagesToScan("com.projetoerp.ERPEstoque")
-                .build();
+    public OpenAPI customOpenApi() {
+        return new OpenAPI()
+                .components(new Components())
+                .info(new io.swagger.v3.oas.models.info.Info()
+                        .title("BackEnd do Projeto ERP")
+                        .version("v0.0.1")
+                        .description("Documentação do projeto ERP Estoque de Mercado"));
     }
 }
