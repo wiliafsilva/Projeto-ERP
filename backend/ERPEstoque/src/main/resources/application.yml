@@ -5,6 +5,12 @@ spring:
     password: senha
     driver-class-name: org.postgresql.Driver
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
   flyway:
     enabled: true
     baseline-on-migrate: false
