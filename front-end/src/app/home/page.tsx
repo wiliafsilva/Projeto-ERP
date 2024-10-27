@@ -8,19 +8,38 @@ import { FaPencilAlt } from "react-icons/fa";
 import Header from '../../../components/header/page';
 import Footer from '../../../components/footer/page';
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import { useRouter } from 'next/navigation';
 
 const Home: React.FC = () => {
     const [menuVisible, setMenuVisible] = useState(false);
+    const router = useRouter();
 
     const toggleMenu = () => {
         setMenuVisible(!menuVisible);
       };
+
+    const handleEditClick = () => {
+      router.push('/editar'); 
+    };
+
+    const handleSearchClick = () => {
+      router.push('/pesquisa');
+    };
+
+    const handleAddClick = () => {
+      router.push('/adicionar');
+    };
+
+    const handleDeletClick = () => {
+      router.push('/remover');
+    };
+
   return (
     <div className={styles.container}>
       <Header/>
       <div className={`${styles.buttonContainer} flex justify-center items-center h-full`}>
         <div>
-          <button className={styles.button1} data-tooltip-id="my-tooltip-1">
+          <button className={styles.button1} onClick={handleEditClick} data-tooltip-id="my-tooltip-1">
             <FaPencilAlt size={70} color='white'/>          
           </button>   
           <ReactTooltip
@@ -30,7 +49,7 @@ const Home: React.FC = () => {
           />       
         </div>
         <div> 
-        <button className={styles.button2} data-tooltip-id="my-tooltip-2">
+        <button className={styles.button2} onClick={handleSearchClick} data-tooltip-id="my-tooltip-2">
           <FaSearch size={70} />
         </button>
         <ReactTooltip
@@ -40,7 +59,7 @@ const Home: React.FC = () => {
           />    
         </div>
         <div>
-        <button className={styles.button3} data-tooltip-id="my-tooltip-3">
+        <button className={styles.button3} onClick={handleAddClick} data-tooltip-id="my-tooltip-3">
           <FaPlus size={70} />
         </button>
         <ReactTooltip
@@ -50,7 +69,7 @@ const Home: React.FC = () => {
           />       
         </div>
         <div>
-        <button className={styles.button4} data-tooltip-id="my-tooltip-4">
+        <button className={styles.button4} onClick={handleDeletClick} data-tooltip-id="my-tooltip-4">
           <FaMinus size={70} />
         </button>
         <ReactTooltip

@@ -164,12 +164,22 @@
     margin: 0 10px;
     font-size: 14px;
   }
-  .table th {
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-  }
   
-  .table th:hover {
-    background-color: rgba(0, 0, 0, 0.1); 
-  }
-  
+  /* Adicionar.module.css */
+.iconEdit {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  right: 2px;
+  top: 8px;
+  color: blue;
+  cursor: pointer;
+}
+.table th {
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.table th:hover {
+  background-color: rgba(0, 0, 0, 0.1); 
+}
