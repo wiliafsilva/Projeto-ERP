@@ -1,0 +1,168 @@
+/* Geral */
+.container {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    background-color: #f8f8f8;
+}
+
+.header {
+    padding: 20px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 80px;
+    padding-left: 2%;
+}
+
+.navLink {  
+    margin: 0 5px;
+    color: #000;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    padding: 2px;
+    text-wrap: nowrap;
+}
+
+.navLink:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Hero Section */
+.heroSection {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 20px 80px; 
+    background-color: #f8f8f8;
+    gap: 20px;
+    align-items: center; 
+    width: calc(100% - 80px); 
+    margin: 20px auto;
+}
+
+.heroImage, .heroImage1 {
+    flex: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.image {
+    width: 100%; 
+    height: 300px; 
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.heroContent {
+    flex: 1;
+    text-align: left;
+}
+
+/* Títulos e texto */
+.heroTitle {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+.heroText {
+    font-size: 20px;
+    color: #000;
+    font-weight: bold;
+}
+
+.heroText1, .heroText2 {
+    font-size: 18px;
+    color: #000;
+    margin: 0;
+    text-align: justify;
+}
+
+.heroButton {
+    padding: 10px 20px;
+    background-color: #00a859;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Features Section */
+.featuresSection {
+    color: #000;
+    padding: 40px 40px;
+    text-align: center;
+    background-color: #f8f8f8;
+    width: calc(100% - 80px); 
+    margin: 20px auto; 
+}
+
+.featuresContainer {    
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.featureCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    max-width: 200px; 
+}
+
+.featureImage {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 100%;
+}
+
+.descriptionText {
+    margin-top: 10px; 
+    text-align: left; 
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+}
+
+.titulolog {
+    color: #000;
+    font-size: 25px;
+    padding-top: 1%;
+    font-weight: bolder;
+    margin-right: 41%;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .heroSection {
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center;
+        padding: 20px; 
+        width: 100%; 
+    }
+
+    .heroImage, .heroContent {
+        margin: 0; 
+        width: 100%; 
+    }
+
+    .heroImage img {
+        max-width: 100%;
+        height: auto; 
+    }
+}
