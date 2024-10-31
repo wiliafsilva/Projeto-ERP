@@ -30,6 +30,7 @@
   display: flex;
   align-items: center;
   color: black;
+  margin-right: 1%;
 }
 
 .nome_user {
@@ -157,4 +158,82 @@
   .footer {
     font-size: 0.65rem;
   }
+}
+.userName{
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+/* Estilos para o contêiner do formulário */
+.formContainer {
+  color: #333; 
+  position: absolute;
+  top: 49%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9f9f9; 
+  border: 1px solid #ccc;
+  border-radius: 8px; 
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+  z-index: 10; 
+  width: 300px; 
+}
+
+/* Estilos para o formulário */
+.formContainer form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para os rótulos */
+.formContainer label {
+  margin-bottom: 5px; 
+  font-weight: bold; 
+}
+
+/* Estilos para os campos de entrada */
+.formContainer input {
+  padding: 10px; 
+  margin-bottom: 15px;
+  border: 1px solid #ccc; 
+  border-radius: 4px;
+  transition: border-color 0.3s; 
+}
+
+/* Estilo para foco nos campos de entrada */
+.formContainer input:focus {
+  border-color: #007bff; 
+  outline: none; 
+}
+
+/* Estilos para botões */
+.formContainer button {
+  padding: 10px; 
+  margin-top: 10px; 
+  border: none;
+  border-radius: 4px; 
+  background-color: #007bff; 
+  color: white; 
+  cursor: pointer; 
+  transition: background-color 0.3s;
+}
+
+/* Estilo para hover nos botões */
+.formContainer button:hover {
+  background-color: #0056b3; 
+}
+
+/* Estilo para o botão de cancelar */
+.formContainer button[type="button"] {
+  background-color: #dc3545; 
+}
+
+.formContainer button[type="button"]:hover {
+  background-color: #c82333; 
+}
+.formTitle{
+  font-weight: bold;
+  margin-bottom: 4%; 
+  font-size: 26px;
 }
