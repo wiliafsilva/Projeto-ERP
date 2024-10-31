@@ -1,7 +1,7 @@
 // pages/index.tsx
 "use client";
 import React from 'react';
-import styles from '../app/style/slide.module.css';
+import styles from '../style/teste.module.css';
 import { useRouter } from 'next/navigation';
 
 const HeroPage: React.FC = () => {
