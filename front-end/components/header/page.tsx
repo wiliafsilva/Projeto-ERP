@@ -1,41 +1,66 @@
-// components/Header.js
+// components/Header.tsx
 import React, { useState } from 'react';
 import { TiShoppingCart } from 'react-icons/ti';
 import { FaRegCircleUser } from 'react-icons/fa6';
 import { ImExit } from 'react-icons/im';
-import styles from '../../src/app/style/Home.module.css'
+import UserForm from '../formUser/page';
+import styles from '../../src/app/style/Home.module.css';
+import { useRouter } from 'next/navigation';
 
-const Header = () => {
+const Header: React.FC = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [formVisible, setFormVisible] = useState(false);
+  const router = useRouter();
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
 
+  const handleHomeClick = () => {
+    router.push('/home');
+  };
+
+  const handleExitClick = () => {
+    router.push('/login');
+  };
+
+  const handleAddUserClick = () => {
+    setFormVisible(true);
+    setMenuVisible(false);
+  };
+
+  const closeForm = () => {
+    setFormVisible(false);
+  };
+
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>
-        <TiShoppingCart size={70} color="black" />
+        <div onClick={handleHomeClick} style={{ cursor: 'pointer' }}>
+          <TiShoppingCart size={70} color="black" />
+        </div>
         Gerenciador de Estoque
       </h1>
       <div className={styles.userInfo}>
-        <div onClick={toggleMenu} className={styles.userIcon}>
-          <FaRegCircleUser size={20} color="black" style={{ marginRight: '10px' }} />
+        <div onClick={toggleMenu} style={{ cursor: 'pointer' }} className={styles.userIcon}>
+          <FaRegCircleUser size={20} color="black" />
         </div>
         <span className={styles.userName}>Usuário13231321</span>
-        <ImExit size={20} color="black" style={{ marginLeft: '10px' }} />
+        <div onClick={handleExitClick} style={{ cursor: 'pointer' }}>
+          <ImExit size={20} color="black" />
+        </div>
       </div>
 
-      {/* Renderizar o menu de opções */}
       {menuVisible && (
         <div className={styles.dropdownMenu}>
           <ul>
-            <li>Adicionar usuário</li>
+            <li onClick={handleAddUserClick}>Adicionar usuário</li>
             <li>Excluir usuário</li>
-            <li>Sair</li>
           </ul>
         </div>
       )}
+
+      {formVisible && <UserForm onClose={closeForm} />}
     </header>
   );
 };

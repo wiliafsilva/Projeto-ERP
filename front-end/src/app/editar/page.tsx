@@ -1,10 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { FaPencilAlt } from 'react-icons/fa'; // Importa o ícone
 import Header from '../../../components/header/page';
 import Footer from '../../../components/footer/page';
-import styles from '../style/Adicionar.module.css';
+import styles from '../style/Editar.module.css';
 import ProdutosIniciais, { Produto } from '../../../components/produtos/page';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Importa o hook useRouter
 
 const parseDate = (dateString: string): Date => {
   const [day, month, year] = dateString.split('/').map(Number);
@@ -15,8 +16,8 @@ const normalizar = (texto: string): string => {
   return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
 };
 
-const AdicionarPage: React.FC = () => {
-  const router = useRouter();
+const EditarPage: React.FC = () => {
+  const router = useRouter(); // Inicializa o router
   const [produtos, setProdutos] = useState<Produto[]>(ProdutosIniciais);
   const [filtro, setFiltro] = useState<string>('todos');
   const [pesquisa, setPesquisa] = useState<string>('');
@@ -116,8 +117,8 @@ const AdicionarPage: React.FC = () => {
     }
   };
 
-  const handleAddProduct = () => {
-    router.push('/addProdutos'); 
+  const irParaEdicao = () => {    
+    router.push(`/editarProdutos`); 
   };
 
   return (
@@ -125,7 +126,7 @@ const AdicionarPage: React.FC = () => {
       <Header />
       <div className={styles.container}>
         <div className={styles.title}>
-            <h2 className={styles.title_h2}>Adicionar Produto</h2>
+          <h2 className={styles.title_h2}>Editar Produto</h2>
         </div>
         <div className={styles.pesquisa}>
           <div className='flex'>
@@ -137,7 +138,6 @@ const AdicionarPage: React.FC = () => {
               value={pesquisa}
               onChange={(e) => setPesquisa(e.target.value)}
             />
-            <button className={styles.botaoAdicionar} onClick={handleAddProduct}>Adicionar</button>
           </div>
         </div>
         <div className={styles.tableWrapper}>
@@ -155,7 +155,7 @@ const AdicionarPage: React.FC = () => {
               {produtosPaginated.map((produto) => (
                 <tr key={produto.codigo} data-status={produto.status}>
                   <td>
-                    <div style={{ 
+                  <div style={{ 
                       width: '2px', 
                       height: '22px', 
                       backgroundColor: produto.corValidade, 
@@ -163,22 +163,15 @@ const AdicionarPage: React.FC = () => {
                       marginRight: '10px', 
                       borderRadius: '20px' 
                     }}></div>
-                    {produto.codigo}
-                  </td>
+                    {produto.codigo}</td>
                   <td>{produto.descricao}</td>
                   <td>{produto.compra}</td>
                   <td>{produto.validade}</td>
-                  <td style={{ position: 'relative' }}>                     
+                  <td style={{ position: 'relative' }}>
                     {produto.quantidade}
-                    <div style={{ 
-                      width: '2px', 
-                      height: '22px', 
-                      backgroundColor: produto.corValidade, 
-                      position: 'absolute', 
-                      right: 2, 
-                      top: 8, 
-                      borderRadius: '20px',                       
-                    }}></div>
+                    <span className={styles.iconEdit} onClick={() => irParaEdicao()}>
+                      <FaPencilAlt />
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -211,4 +204,4 @@ const AdicionarPage: React.FC = () => {
   );
 };
 
-export default AdicionarPage;
+export default EditarPage;
