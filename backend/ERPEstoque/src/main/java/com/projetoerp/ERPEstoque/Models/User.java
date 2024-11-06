@@ -17,7 +17,7 @@ public class User {
     private String username;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
+    @Column(name = "senha", nullable = false)
     private String password;
 
     public User(Long id, String username, String email, String password) {
