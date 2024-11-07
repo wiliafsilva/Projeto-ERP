@@ -82,7 +82,7 @@ const EditarProdutos: React.FC = () => {
             </div>
           <div className={styles.buttonGroup}>
             <button className={styles.saveButton}>Salvar Alterações</button>
-            <button className={styles.cancelButton} onClick={handleCancel}>Cancelar Alterações</button>
+            <button className={styles.cancelButton} type='button' onClick={handleCancel}>Cancelar Alterações</button>
           </div>
           </form>
         </div>
