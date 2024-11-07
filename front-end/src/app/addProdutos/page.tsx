@@ -82,7 +82,7 @@ const AddProdutos: React.FC = () => {
             </div>
           <div className={styles.buttonGroup}>
             <button className={styles.saveButton}>Salvar</button>
-            <button className={styles.cancelButton} onClick={handleCancel}>Cancelar</button>
+            <button className={styles.cancelButton} type='button' onClick={handleCancel}>Cancelar</button>
           </div>
           </form>
         </div>
