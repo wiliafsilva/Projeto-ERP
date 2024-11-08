@@ -1,11 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { FaPencilAlt } from 'react-icons/fa'; // Importa o ícone
+import { FaPencilAlt } from 'react-icons/fa'; 
 import Header from '../../../components/header/page';
 import Footer from '../../../components/footer/page';
 import styles from '../style/Editar.module.css';
 import ProdutosIniciais, { Produto } from '../../../components/produtos/page';
-import { useRouter } from 'next/navigation'; // Importa o hook useRouter
+import { useRouter } from 'next/navigation'; 
 
 const parseDate = (dateString: string): Date => {
   const [day, month, year] = dateString.split('/').map(Number);
@@ -17,7 +17,7 @@ const normalizar = (texto: string): string => {
 };
 
 const EditarPage: React.FC = () => {
-  const router = useRouter(); // Inicializa o router
+  const router = useRouter(); 
   const [produtos, setProdutos] = useState<Produto[]>(ProdutosIniciais);
   const [filtro, setFiltro] = useState<string>('todos');
   const [pesquisa, setPesquisa] = useState<string>('');
@@ -71,7 +71,8 @@ const EditarPage: React.FC = () => {
     });
     
     const produtosPesquisados = produtosFiltrados.filter(produto =>
-      normalizar(produto.descricao).includes(normalizar(pesquisa))
+      normalizar(produto.descricao).includes(normalizar(pesquisa)) ||
+      produto.codigo.toString().includes(pesquisa) 
     );
     
     const produtosOrdenados = produtosPesquisados.sort((a, b) => {
@@ -134,7 +135,7 @@ const EditarPage: React.FC = () => {
             <input
               type="text"
               className={styles.inputPesquisa}
-              placeholder="Nome do Produto"
+              placeholder="Nome do Produto ou Código"
               value={pesquisa}
               onChange={(e) => setPesquisa(e.target.value)}
             />
@@ -155,7 +156,7 @@ const EditarPage: React.FC = () => {
               {produtosPaginated.map((produto) => (
                 <tr key={produto.codigo} data-status={produto.status}>
                   <td>
-                  <div style={{ 
+                    <div style={{ 
                       width: '2px', 
                       height: '22px', 
                       backgroundColor: produto.corValidade, 
@@ -163,7 +164,8 @@ const EditarPage: React.FC = () => {
                       marginRight: '10px', 
                       borderRadius: '20px' 
                     }}></div>
-                    {produto.codigo}</td>
+                    {produto.codigo}
+                  </td>
                   <td>{produto.descricao}</td>
                   <td>{produto.compra}</td>
                   <td>{produto.validade}</td>

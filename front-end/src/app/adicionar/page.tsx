@@ -70,7 +70,8 @@ const AdicionarPage: React.FC = () => {
     });
     
     const produtosPesquisados = produtosFiltrados.filter(produto =>
-      normalizar(produto.descricao).includes(normalizar(pesquisa))
+      normalizar(produto.descricao).includes(normalizar(pesquisa)) ||
+      produto.codigo.toString().includes(pesquisa)  
     );
     
     const produtosOrdenados = produtosPesquisados.sort((a, b) => {
@@ -133,11 +134,11 @@ const AdicionarPage: React.FC = () => {
             <input
               type="text"
               className={styles.inputPesquisa}
-              placeholder="Nome do Produto"
+              placeholder="Nome do Produto ou Código"
               value={pesquisa}
               onChange={(e) => setPesquisa(e.target.value)}
             />
-            <button className={styles.botaoAdicionar} onClick={handleAddProduct}>Adicionar</button>
+            <button className={styles.botaoAdicionar} type='button' onClick={handleAddProduct}>Adicionar</button>
           </div>
         </div>
         <div className={styles.tableWrapper}>
