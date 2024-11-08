@@ -66,11 +66,12 @@ const EstoquePage: React.FC = () => {
           return false;
       }
     });
-    
+
     const produtosPesquisados = produtosFiltrados.filter(produto =>
-      normalizar(produto.descricao).includes(normalizar(pesquisa))
+      normalizar(produto.descricao).includes(normalizar(pesquisa)) ||
+      produto.codigo.toString().includes(pesquisa)
     );
-    
+
     const produtosOrdenados = produtosPesquisados.sort((a, b) => {
       const campoA = a[ordem as keyof Produto];
       const campoB = b[ordem as keyof Produto];
@@ -129,7 +130,7 @@ const EstoquePage: React.FC = () => {
           <input
             type="text"
             className={styles.inputPesquisa}
-            placeholder="Nome do Produto"
+            placeholder="Nome do Produto ou Código"
             value={pesquisa}
             onChange={(e) => setPesquisa(e.target.value)}
           />
