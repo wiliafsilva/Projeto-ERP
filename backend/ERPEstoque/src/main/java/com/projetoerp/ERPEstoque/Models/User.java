@@ -1,16 +1,18 @@
 package com.projetoerp.ERPEstoque.Models;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
+@Table(name = "usuario")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(hidden = true)
     private Long id;
 
     @Column(name = "usuario",nullable = false)
@@ -20,8 +22,7 @@ public class User {
     @Column(name = "senha", nullable = false)
     private String password;
 
-    public User(Long id, String username, String email, String password) {
-        this.id = id;
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -51,7 +52,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
     public String getPassword() {
