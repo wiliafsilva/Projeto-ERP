@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "produtos do estoque")
+@Tag(name = "Endpoint de Produtos do Estoque")
 @RestController
 @RequestMapping("/estoque")
 public class StockController {

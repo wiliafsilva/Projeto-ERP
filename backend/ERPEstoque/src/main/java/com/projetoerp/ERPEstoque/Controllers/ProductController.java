@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "endpoint de produtos")
+@Tag(name = "Endpoint de Produtos")
 @RestController
 @RequestMapping("/estoque/produtos")
 public class ProductController {
@@ -60,7 +60,7 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return ResponseEntity.ok("Produto Deletado com Sucesso!");
+        return ResponseEntity.ok("Produto deletado com sucesso!");
     }
 
 
