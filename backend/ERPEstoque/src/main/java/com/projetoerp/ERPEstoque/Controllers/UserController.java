@@ -16,6 +16,7 @@ import java.util.List;
 
 @Tag(name = "Endpoint de Usuários")
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 @RequestMapping("/user")
 public class UserController {
 

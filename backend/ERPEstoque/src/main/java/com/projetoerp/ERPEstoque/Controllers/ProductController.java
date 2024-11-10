@@ -16,6 +16,7 @@ import java.util.List;
 
 @Tag(name = "Endpoint de Produtos")
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 @RequestMapping("/estoque/produtos")
 public class ProductController {
 
