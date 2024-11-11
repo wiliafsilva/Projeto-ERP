@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Header from '../../../components/header/page';
 import Footer from '../../../components/footer/page';
@@ -11,7 +12,11 @@ const AddProdutos: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [pesoBruto, setPesoBruto] = useState(0);
+  const [pesoLiquido, setPesoLiquido] = useState(0);
+  const [quantidade, setQuantidade] = useState(0);
   const [ultimaCompra, setUltimaCompra] = useState('');
+  const [unidade, setUnidade] = useState('UN');
   const [validade, setValidade] = useState('');
 
   useEffect(() => {
@@ -46,6 +51,28 @@ const AddProdutos: React.FC = () => {
       return;
     }
 
+    axios
+      .post('http://localhost:8080/estoque/produtos/novo', {
+        descricao: descricao,
+        data_de_compra: ultimaCompra,
+        unidade: unidade,
+        data_de_validade: validade,
+        quantidade: quantidade,
+        peso_bruto: pesoBruto,
+        peso_liquido: pesoLiquido
+      }, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json;charset=UTF-8',
+        }
+      })
+      .then((response) => {
+        if (response.status === 201) {
+          // Mostrar toast de sucesso
+        } else {
+          // Mostrar toast de erro
+        }
+      })
   };
 
   return (
@@ -73,7 +100,7 @@ const AddProdutos: React.FC = () => {
             <div className={styles.singleLine}>
               <div className={styles.formGroup}>
                 <label htmlFor="unidade">Unidade:
-                  <select id="unidade">
+                  <select id="unidade" onChange={(e) => setUnidade(e.target.value)}>
                     <option value="UN">UN</option>
                     <option value="CX">CX</option>
                     <option value="KG">KG</option>
@@ -113,6 +140,7 @@ const AddProdutos: React.FC = () => {
                     type="number"
                     id="quantidade"
                     placeholder="0000"
+                    onChange={(e) => setQuantidade(parseInt(e.target.value) || 0)}
                     min="0"
                     step="1"
                   />
@@ -127,6 +155,7 @@ const AddProdutos: React.FC = () => {
                     type="number"
                     id="pesoBruto"
                     placeholder="0,000"
+                    onChange={(e) => setPesoBruto(parseFloat(e.target.value) || 0)}
                     min="0"
                     step="any"
                   />
@@ -139,6 +168,7 @@ const AddProdutos: React.FC = () => {
                     type="number"
                     id="pesoLiquido"
                     placeholder="0,000"
+                    onChange={(e) => setPesoLiquido(parseFloat(e.target.value) || 0)}
                     min="0"
                     step="any"
                   />
