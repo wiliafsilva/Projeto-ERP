@@ -1,10 +1,11 @@
 package com.projetoerp.ERPEstoque.Models;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(hidden = true)
     private Long id;
 
     @Column(name = "descricao",nullable = false)
@@ -20,13 +22,13 @@ public class Product {
 
     @Column(name = "compra",nullable = false)
     @CreationTimestamp
-    private LocalDateTime data_de_compra;
+    private LocalDate data_de_compra;
 
     @Column(name = "unidade", length = 2)
     private String unidade;
 
     @Column(name = "validade",nullable = false)
-    private LocalDateTime data_de_validade;
+    private LocalDate data_de_validade;
 
     @Column(name = "quantidade",nullable = false)
     private int quantidade;
@@ -41,7 +43,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, LocalDateTime data_de_compra, String descricao, int quantidade, LocalDateTime data_de_validade, String unidade, Float peso_bruto,Float peso_liquido) {
+    public Product(Long id, LocalDate data_de_compra, String descricao, int quantidade, LocalDate data_de_validade, String unidade, Float peso_bruto,Float peso_liquido) {
         this.id = id;
         this.data_de_compra = data_de_compra;
         this.descricao = descricao;
@@ -68,11 +70,11 @@ public class Product {
         this.descricao = descricao;
     }
 
-    public LocalDateTime getData_de_compra() {
+    public LocalDate getData_de_compra() {
         return data_de_compra;
     }
 
-    public void setData_de_compra(LocalDateTime data_de_compra) {
+    public void setData_de_compra(LocalDate data_de_compra) {
         this.data_de_compra = data_de_compra;
     }
 
@@ -84,11 +86,11 @@ public class Product {
         this.unidade = unidade;
     }
 
-    public LocalDateTime getData_de_validade() {
+    public LocalDate getData_de_validade() {
         return data_de_validade;
     }
 
-    public void setData_de_validade(LocalDateTime data_de_validade) {
+    public void setData_de_validade(LocalDate data_de_validade) {
         this.data_de_validade = data_de_validade;
     }
 
