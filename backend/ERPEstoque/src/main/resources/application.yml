@@ -1,20 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/projeto_db
-    username: postgres
-    password: senha
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
-springdoc:
-  api-docs:
-    path: /v3/api-docs
-  swagger-ui:
-    path: /swagger-ui.html
-
-  flyway:
-    enabled: true
-    baseline-on-migrate: false
-    locations: classpath:db/migration
 
   jpa:
     hibernate:
@@ -23,3 +12,14 @@ springdoc:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+flyway:
+  enabled: true
+  baseline-on-migrate: false
+  locations: classpath:db/migration
