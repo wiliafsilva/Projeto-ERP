@@ -1,9 +1,18 @@
 'use client';
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Header from '../../../components/header/page';
 import Footer from '../../../components/footer/page';
 import styles from '../style/Pesquisa.module.css';
 import ProdutosIniciais, { Produto } from '../../../components/produtos/page';
+
+interface Produto2 {
+  codigo: number;
+  descricao: string;
+  compra: string;
+  validade: string;
+  quantidade: number;
+}
 
 const parseDate = (dateString: string): Date => {
   const [day, month, year] = dateString.split('/').map(Number);
@@ -24,7 +33,16 @@ const EstoquePage: React.FC = () => {
   const [itensPorPagina] = useState<number>(10);
 
   useEffect(() => {
-    setProdutos(ProdutosIniciais);
+    axios
+      .get('http://localhost:8080/estoque/produtos', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json;charset=UTF-8',
+        }
+      })
+      .then((response) => {
+        // setProdutos(response.data);
+      });
   }, []);
 
   const filtrarProdutos = () => {
