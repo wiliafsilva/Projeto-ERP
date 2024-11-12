@@ -1,13 +1,14 @@
 # Etapa 1: Build do front-end
-FROM node:lts AS build
-WORKDIR /app
+FROM node:lts-alpine
 
-# Copia os arquivos de dependência e instala
-COPY front-end/package*.json ./front-end/
-RUN npm install --prefix front-end
+WORKDIR /app/front-end
 
-# Copia o código do front-end
-COPY front-end/ ./front-end/
+COPY . .
 
-# Gera os arquivos estáticos para produção
-RUN npm run build --prefix front-end
+RUN npm install
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]

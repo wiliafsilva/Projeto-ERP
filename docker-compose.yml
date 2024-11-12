@@ -1,14 +1,12 @@
-version: '3.8'
-
 services:
-  app:
-    build: ./backend  # Caminho para o Dockerfile do Spring Boot
+  backend:
+    build: ./backend
     ports:
-      - "8081:8080"
+      - "8080:8080"
     env_file:
-      - .env  # Carrega as variáveis do arquivo .env para o container
+      - .env
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?ssl=require&user=${DB_USER}&password=${DB_PASSWORD}
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
@@ -18,18 +16,8 @@ services:
       - FLYWAY_ENABLED=true
       - FLYWAY_BASELINE_ON_MIGRATE=false
       - FLYWAY_LOCATIONS=classpath:db/migration
-
-  db:
-    image: postgres:16
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+  
+  frontend:
+    build: ./front-end
     ports:
-      - "5433:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data  # Persistência dos dados do banco de dados
-
-volumes:
-  postgres_data:
-    driver: local
+      - "3000:3000"
