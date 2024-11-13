@@ -2,17 +2,27 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Swal from "sweetalert2";
 import styles from "../style/Login.module.css";
 import { TiShoppingCart } from "react-icons/ti";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Lógica de autenticação(Falta definir logica de autenticação)
-    console.log("Usuário:", username, "Senha:", password);
+    if ((username == 'panimarinho' && password == '12345678') || (username == 'ricardo' && password == '12345678')) {
+      router.push('/home');
+    } else {
+      Swal.fire({
+        title: 'Usuário ou senha inválidos!',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
   };
 
   return (
@@ -47,6 +57,7 @@ const Login = () => {
               placeholder="Digite seu usuário"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              autoComplete="false"
             />
           </div>
 
@@ -58,6 +69,7 @@ const Login = () => {
               placeholder="Digite sua senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="false"
             />
           </div>
 

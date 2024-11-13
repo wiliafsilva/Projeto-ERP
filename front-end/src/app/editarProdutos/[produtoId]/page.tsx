@@ -1,17 +1,27 @@
 'use client';
 
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Header from '../../../components/header/page';
-import Footer from '../../../components/footer/page';
-import styles from '../style/EditarProdutos.module.css';
+import Header from '../../../../components/header/page';
+import Footer from '../../../../components/footer/page';
+import styles from '../../style/EditarProdutos.module.css';
 import { useRouter } from 'next/navigation';
 
-const EditarProdutos: React.FC = () => {
+
+interface Props {
+  params: Promise<{ produtoId: string }>
+}
+
+const EditarProdutos = ({ params }: Props)  => {
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [pesoBruto, setPesoBruto] = useState(0);
+  const [pesoLiquido, setPesoLiquido] = useState(0);
+  const [quantidade, setQuantidade] = useState(0);
   const [ultimaCompra, setUltimaCompra] = useState('');
+  const [unidade, setUnidade] = useState('UN');
   const [validade, setValidade] = useState('');
 
   useEffect(() => {
@@ -28,7 +38,7 @@ const EditarProdutos: React.FC = () => {
     router.push('/editar');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!descricao) {
@@ -41,6 +51,27 @@ const EditarProdutos: React.FC = () => {
       return;
     }
 
+    const produtoId = (await params).produtoId;
+    axios
+      .put(`http://localhost:8080/estoque/produtos/${produtoId}`, {
+        descricao: descricao,
+        compra: ultimaCompra,
+        validade: validade,
+        quantidade: quantidade
+      }, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json;charset=UTF-8',
+        }
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          // Mostrar toast de sucesso
+        } else {
+          // Mostrar toast de erro
+        }
+        router.push('/editar');
+      })
   };
 
   return (
@@ -68,7 +99,7 @@ const EditarProdutos: React.FC = () => {
             <div className={styles.singleLine}>
               <div className={styles.formGroup}>
                 <label htmlFor="unidade">Unidade:
-                  <select id="unidade">
+                  <select id="unidade" onChange={(e) => setUnidade(e.target.value)}>
                     <option value="UN">UN</option>
                     <option value="CX">CX</option>
                     <option value="KG">KG</option>
@@ -94,6 +125,9 @@ const EditarProdutos: React.FC = () => {
                   <input
                     type="date"
                     id="validade"
+                    value={validade}
+                    onChange={(e) => setValidade(e.target.value)}
+                    min={currentDate} 
                     required 
                   />
                 </label>
@@ -105,6 +139,7 @@ const EditarProdutos: React.FC = () => {
                     type="number"
                     id="quantidade"
                     placeholder="0000"
+                    onChange={(e) => setQuantidade(parseInt(e.target.value) || 0)}
                     min="0"
                     step="1"
                   />
@@ -119,6 +154,7 @@ const EditarProdutos: React.FC = () => {
                     type="number"
                     id="pesoBruto"
                     placeholder="0,000"
+                    onChange={(e) => setPesoBruto(parseFloat(e.target.value) || 0)}
                     min="0"
                     step="any"
                   />
@@ -131,6 +167,7 @@ const EditarProdutos: React.FC = () => {
                     type="number"
                     id="pesoLiquido"
                     placeholder="0,000"
+                    onChange={(e) => setPesoLiquido(parseFloat(e.target.value) || 0)}
                     min="0"
                     step="any"
                   />
