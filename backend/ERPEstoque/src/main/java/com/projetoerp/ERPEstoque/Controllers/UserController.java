@@ -6,6 +6,7 @@ import com.projetoerp.ERPEstoque.Exceptions.UserNotFoundException;
 import com.projetoerp.ERPEstoque.Models.User;
 import com.projetoerp.ERPEstoque.Repository.UserRepository;
 import com.projetoerp.ERPEstoque.Services.UserServices;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,12 +27,14 @@ public class UserController {
     @Autowired
     private UserServices userService;
 
+    @Operation(summary = "Obter usuários")
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userRepository.findAll();
         return ResponseEntity.ok(users);
     }
 
+    @Operation(summary = "Cadastrar usuário")
     @PostMapping("/signup")
     public ResponseEntity<String> createUser(@RequestBody User user) {
         if (userService.findByUsername(user.getUsername()) != null) {
@@ -41,12 +44,14 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Atualizar usuário")
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         userService.updateUser(id, updatedUser);
         return ResponseEntity.ok("Usuário atualizado com sucesso!");
     }
 
+    @Operation(summary = "Deletar usuário")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
