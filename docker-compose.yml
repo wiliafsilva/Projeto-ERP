@@ -1,23 +1,19 @@
-version: '3.8'
-
 services:
   frontend:
-    image: front-end:latest
-    container_name: frontend
+    image: frontend
     ports:
-      - "8081:80"  # Mudou de 80:80 para 8081:80
+      - "3000:3000"  # O frontend continua escutando na porta 3000 dentro do container
     networks:
-      - app-network
+      - projeto-net
     depends_on:
       - backend
 
   backend:
-    image: backend:latest
-    container_name: backend
+    image: backend
     ports:
-      - "8082:8080"
+      - "8081:8081"
     networks:
-      - app-network
+      - projeto-net
     environment:
       - DB_HOST=postgres-db
       - DB_PORT=5432
@@ -30,6 +26,8 @@ services:
 
   db:
     image: postgres:13
+    ports:
+      - "5432:5432"
     container_name: postgres-db
     environment:
       POSTGRES_USER: postgres
@@ -38,24 +36,23 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
-      - app-network
+      - projeto-net
 
   nginx:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "8083:80"  # Mudou de 80:80 para 8083:80
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - "8083:80"  # O Nginx escutará na porta 8083 do host
     networks:
-      - app-network
+      - projeto-net
     depends_on:
       - frontend
       - backend
 
 networks:
-  app-network:
+  projeto-net:
     driver: bridge
+    name: projeto-net
 
 volumes:
   db_data:
