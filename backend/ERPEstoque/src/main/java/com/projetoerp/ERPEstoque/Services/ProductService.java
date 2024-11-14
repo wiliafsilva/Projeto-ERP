@@ -1,10 +1,11 @@
 package com.projetoerp.ERPEstoque.Services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.projetoerp.ERPEstoque.Exceptions.ProductNotFoundException;
 import com.projetoerp.ERPEstoque.Models.Product;
 import com.projetoerp.ERPEstoque.Repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {

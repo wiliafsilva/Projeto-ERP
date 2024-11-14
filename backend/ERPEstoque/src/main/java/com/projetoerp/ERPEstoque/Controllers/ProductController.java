@@ -1,21 +1,33 @@
 package com.projetoerp.ERPEstoque.Controllers;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.projetoerp.ERPEstoque.Exceptions.ProductNotFoundException;
 import com.projetoerp.ERPEstoque.Models.Product;
 import com.projetoerp.ERPEstoque.Repository.ProductRepository;
 import com.projetoerp.ERPEstoque.Services.ProductService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@Tag(name = "endpoint de produtos")
+@Tag(name = "Endpoint de Produtos")
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 @RequestMapping("/estoque/produtos")
 public class ProductController {
 
@@ -60,7 +72,7 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return ResponseEntity.ok("Produto Deletado com Sucesso!");
+        return ResponseEntity.ok("Produto deletado com sucesso!");
     }
 
 

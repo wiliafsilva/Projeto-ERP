@@ -6,13 +6,14 @@ import Header from '../../../../components/header/page';
 import Footer from '../../../../components/footer/page';
 import styles from '../../style/EditarProdutos.module.css';
 import { useRouter } from 'next/navigation';
-
+import { toast, ToastContainer } from 'react-toastify';  // Importando o Toastify
+import 'react-toastify/dist/ReactToastify.css';  // Importando o CSS
 
 interface Props {
   params: Promise<{ produtoId: string }>
 }
 
-const EditarProdutos = ({ params }: Props)  => {
+const EditarProdutos = ({ params }: Props) => {
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
@@ -41,13 +42,24 @@ const EditarProdutos = ({ params }: Props)  => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validação básica
     if (!descricao) {
-      alert('Por favor, preencha o campo "Descrição".');
+      toast.error('Por favor, preencha o campo "Descrição".', {
+        position: 'top-center',
+        autoClose: 3000,
+        theme: 'colored',
+        style: { backgroundColor: '#dc3545', color: '#fff' },
+      });
       return;
     }
 
     if (!ultimaCompra) {
-      alert('Por favor, preencha o campo "Última Compra" com uma data válida.');
+      toast.error('Por favor, preencha o campo "Última Compra" com uma data válida.', {
+        position: 'top-center',
+        autoClose: 3000,
+        theme: 'colored',
+        style: { backgroundColor: '#dc3545', color: '#fff' },
+      });
       return;
     }
 
@@ -66,12 +78,32 @@ const EditarProdutos = ({ params }: Props)  => {
       })
       .then((response) => {
         if (response.status === 200) {
-          // Mostrar toast de sucesso
+          toast.success('Produto atualizado com sucesso!', {
+            position: 'top-center',
+            autoClose: 3000,
+            theme: 'colored',
+            style: { backgroundColor: '#12A150', color: '#fff' },
+          });
+          setTimeout(() => {
+            router.push('/editar');
+          }, 2000);
         } else {
-          // Mostrar toast de erro
+          toast.error('Erro ao atualizar o produto. Tente novamente.', {
+            position: 'top-center',
+            autoClose: 3000,
+            theme: 'colored',
+            style: { backgroundColor: '#dc3545', color: '#fff' },
+          });
         }
-        router.push('/editar');
       })
+      .catch((error) => {
+        toast.error('Erro ao salvar alterações. Tente novamente!', {
+          position: 'top-center',
+          autoClose: 3000,
+          theme: 'colored',
+          style: { backgroundColor: '#dc3545', color: '#fff' },
+        });
+      });
   };
 
   return (
@@ -147,6 +179,7 @@ const EditarProdutos = ({ params }: Props)  => {
               </div>
             </div>
 
+            {/* Bloco oculto por enquanto 
             <div className={styles.singleLine}>
               <div className={styles.formGroup}>
                 <label htmlFor="pesoBruto">Peso Bruto:
@@ -174,7 +207,7 @@ const EditarProdutos = ({ params }: Props)  => {
                 </label>
               </div>
             </div>
-
+            */}
             <div className={styles.buttonGroup}>
               <button className={styles.saveButton} type="submit">Salvar Alterações</button>
               <button className={styles.cancelButton} type="button" onClick={handleCancel}>Cancelar Alterações</button>
@@ -184,6 +217,14 @@ const EditarProdutos = ({ params }: Props)  => {
       </div>
 
       <Footer text="Versão 1.0" />
+
+      {/* ToastContainer para exibir as notificações */}
+      <ToastContainer
+        newestOnTop={true}
+        closeOnClick={true}
+        pauseOnFocusLoss={false}
+        pauseOnHover={false}
+      />
     </div>
   );
 };

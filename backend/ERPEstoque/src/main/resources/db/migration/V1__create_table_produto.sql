@@ -1,10 +1,7 @@
-CREATE TABLE produto (
-    id SERIAL PRIMARY KEY,
-    compra TIMESTAMP(6) NOT NULL,
-    unidade VARCHAR(2),
-    validade TIMESTAMP(6) NOT NULL,
+CREATE TABLE public.produto (
+    id SERIAL PRIMARY KEY NOT NULL,
     descricao VARCHAR(255) NOT NULL,
-    quantidade INT NOT NULL,
-    peso_bruto FLOAT,
-    peso_liquido FLOAT
+    compra DATE NOT NULL,
+    validade DATE NOT NULL,
+    quantidade INT NOT NULL
 );

@@ -49,3 +49,14 @@ html, body {
   overflow-x: auto; 
   overflow-y: auto; 
 }
+.swal2-confirm {
+  background-color: red !important;
+  color: white !important;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.swal2-cancel {
+  background-color: green !important;
+  color: white !important;
+}

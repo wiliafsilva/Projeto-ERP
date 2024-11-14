@@ -9,7 +9,7 @@ import stylesP from '@/app/style/Pesquisa.module.css';
 import stylesR from '@/app/style/Remover.module.css';
 import { useRouter } from 'next/navigation';
 import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
-
+import Swal from 'sweetalert2';
 
 interface Produto {
   id: string,
@@ -47,15 +47,14 @@ const TabelaProdutos = ({ titulo, tipo }: TabelaProdutosProps) => {
   const [itensPorPagina] = useState<number>(10);
 
   const ObterProdutos = async () => {
-    const response = await axios
-      .get('http://localhost:8080/estoque/produtos', {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json;charset=UTF-8',
-        }
-      })
+    const response = await axios.get('http://localhost:8080/estoque/produtos', {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json;charset=UTF-8',
+      }
+    });
     return response.data;
-  }
+  };
 
   const fetchProdutos = async () => {
     const produtosData = await ObterProdutos();
@@ -115,13 +114,7 @@ const TabelaProdutos = ({ titulo, tipo }: TabelaProdutosProps) => {
       const campoA = a[ordem as keyof Produto];
       const campoB = b[ordem as keyof Produto];
 
-      if (ordem === 'validade') {
-        const dataA = parseDateStringToDate(campoA as string);
-        const dataB = parseDateStringToDate(campoB as string);
-        return direcaoOrdem === 'asc' ? dataA.getTime() - dataB.getTime() : dataB.getTime() - dataA.getTime();
-      }
-
-      if (ordem === 'compra') {
+      if (ordem === 'validade' || ordem === 'compra') {
         const dataA = parseDateStringToDate(campoA as string);
         const dataB = parseDateStringToDate(campoB as string);
         return direcaoOrdem === 'asc' ? dataA.getTime() - dataB.getTime() : dataB.getTime() - dataA.getTime();
@@ -159,6 +152,7 @@ const TabelaProdutos = ({ titulo, tipo }: TabelaProdutosProps) => {
       setPaginaAtual(pagina);
     }
   };
+
   const handleAddProduct = () => {
     router.push('/addProdutos'); 
   };
@@ -169,18 +163,55 @@ const TabelaProdutos = ({ titulo, tipo }: TabelaProdutosProps) => {
   };
 
   const handleExluir = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    const produtoId = parseInt($(event.target).closest('tr').prop('id')) || 0;
-    axios
-      .delete(`http://localhost:8080/estoque/produtos/${produtoId}`, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json;charset=UTF-8',
-        }
-      })
-      .then((response) => {
-        fetchProdutos();
-      });
-  }
+    const produtoId = $(event.target).closest('tr').prop('id');
+    const produtoDescricao = $(event.target).closest('tr').find('td').eq(1).text();
+
+    if (!produtoId) {
+      console.error("ID do produto não encontrado.");
+      return;
+    }
+
+    Swal.fire({
+      title: `Tem certeza que deseja excluir o produto: ${produtoDescricao}?`,
+      text: "Essa ação não pode ser desfeita.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Excluir',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+      customClass: {
+        confirmButton: 'btn-confirm',  
+        cancelButton: 'btn-cancel'     
+      },
+      backdrop: 'rgba(0,0,0,0.1)' 
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:8080/estoque/produtos/${produtoId}`, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json;charset=UTF-8',
+          }
+        })
+        .then(() => {
+          fetchProdutos();
+          Swal.fire({
+            title: 'Produto excluído com sucesso!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            backdrop: false 
+          });
+        })
+        .catch((error) => {
+          console.error("Erro ao excluir produto:", error);
+          Swal.fire({
+            title: 'Erro ao excluir produto!',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        });
+      }
+    });
+  };
 
   return (
     <div className={stylesA.container}>
