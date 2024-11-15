@@ -61,7 +61,7 @@ public class Product {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = descricao.trim();
     }
 
     public LocalDate getCompra() {

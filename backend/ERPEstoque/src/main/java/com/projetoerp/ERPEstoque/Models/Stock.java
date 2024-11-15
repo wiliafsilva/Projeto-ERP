@@ -1,8 +1,7 @@
 package com.projetoerp.ERPEstoque.Models;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -19,9 +18,9 @@ public class Stock {
     @Column(name = "unidade")
     private String unity;
 
-    private LocalDateTime validade;
+    private LocalDate validade;
 
-    private LocalDateTime compra;
+    private LocalDate compra;
 
     private Float peso_bruto;
 
@@ -30,7 +29,7 @@ public class Stock {
     public Stock() {
     }
 
-    public Stock(Long id, String description, LocalDateTime validade, String unity, Float peso_bruto, LocalDateTime compra, Float peso_liquido) {
+    public Stock(Long id, String description, LocalDate validade, String unity, Float peso_bruto, LocalDate compra, Float peso_liquido) {
         this.id = id;
         this.description = description;
         this.validade = validade;
@@ -64,19 +63,19 @@ public class Stock {
         this.unity = unity;
     }
 
-    public LocalDateTime getValidade() {
+    public LocalDate getValidade() {
         return validade;
     }
 
-    public void setValidade(LocalDateTime validade) {
+    public void setValidade(LocalDate validade) {
         this.validade = validade;
     }
 
-    public LocalDateTime getCompra() {
+    public LocalDate getCompra() {
         return compra;
     }
 
-    public void setCompra(LocalDateTime compra) {
+    public void setCompra(LocalDate compra) {
         this.compra = compra;
     }
 

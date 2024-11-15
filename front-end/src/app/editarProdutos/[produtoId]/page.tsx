@@ -13,6 +13,11 @@ interface Props {
   params: Promise<{ produtoId: string }>
 }
 
+const parseLocalDateToDate = (localDateString: string) => {
+  let [day, month, year] = localDateString.split('/');
+  return new Date(`${year}/${month}/${day}`);
+}
+
 const EditarProdutos = ({ params }: Props) => {
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
@@ -29,6 +34,23 @@ const EditarProdutos = ({ params }: Props) => {
     const today = new Date().toISOString().split('T')[0];
     setCurrentDate(today);
     setIsMounted(true);
+    
+    const ObterProdutoPeloId = async () => {
+      const produtoId = (await params).produtoId;
+      axios
+        .get(`http://localhost:8080/estoque/produtos/${produtoId}`, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json;charset=UTF-8',
+          }
+      }).then((response) => {
+        setDescricao(response.data.descricao);
+        setUltimaCompra(response.data.compra);
+        setValidade(response.data.validade);
+        setQuantidade(parseInt(response.data.quantidade) || 0);
+      });
+    }
+    ObterProdutoPeloId();
   }, []);
 
   if (!isMounted) {
@@ -67,8 +89,8 @@ const EditarProdutos = ({ params }: Props) => {
     axios
       .put(`http://localhost:8080/estoque/produtos/${produtoId}`, {
         descricao: descricao,
-        compra: ultimaCompra,
-        validade: validade,
+        compra: parseLocalDateToDate(ultimaCompra),
+        validade: parseLocalDateToDate(validade),
         quantidade: quantidade
       }, {
         headers: {
@@ -159,7 +181,6 @@ const EditarProdutos = ({ params }: Props) => {
                     id="validade"
                     value={validade}
                     onChange={(e) => setValidade(e.target.value)}
-                    min={currentDate} 
                     required 
                   />
                 </label>
@@ -171,6 +192,7 @@ const EditarProdutos = ({ params }: Props) => {
                     type="number"
                     id="quantidade"
                     placeholder="0000"
+                    value={quantidade}
                     onChange={(e) => setQuantidade(parseInt(e.target.value) || 0)}
                     min="0"
                     step="1"

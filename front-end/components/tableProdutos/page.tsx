@@ -20,7 +20,7 @@ interface Produto {
 }
 
 const parseDateStringToDate = (dateString: string): Date => {
-  return new Date(dateString);
+  return new Date(`${dateString}T00:00:00`);
 };
 
 const parseDateStringToLocaleDateString = (dateString: string): string => {
@@ -127,7 +127,7 @@ const TabelaProdutos = ({ titulo, tipo }: TabelaProdutosProps) => {
       }
       return 0;
     });
-
+    console.log(produtosOrdenados);
     return produtosOrdenados;
   };
 
@@ -245,7 +245,7 @@ const TabelaProdutos = ({ titulo, tipo }: TabelaProdutosProps) => {
         <table className={stylesP.table}>
           <thead>
             <tr>
-              <th onClick={() => ordenarPor('codigo')}>Código</th>
+              <th onClick={() => ordenarPor('id')}>Código</th>
               <th onClick={() => ordenarPor('descricao')}>Descrição</th>
               <th onClick={() => ordenarPor('compra')}>Data de Compra</th>
               <th onClick={() => ordenarPor('validade')}>Validade</th>

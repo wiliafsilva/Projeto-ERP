@@ -2,8 +2,10 @@ package com.projetoerp.ERPEstoque.Controllers;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,11 +39,18 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @Operation(summary = "Listar Produtos")
+    @Operation(summary = "Obter Produtos")
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> produtos = productRepository.findAll();
+        List<Product> produtos = productRepository.findAll(Sort.by(Sort.Order.asc("id")));
         return ResponseEntity.ok(produtos);
+    }
+
+    @Operation(summary = "Obter Produto pelo Id")
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Product>> getAllProducts(@PathVariable Long id) {
+        Optional<Product> produto = productRepository.findById(id);
+        return ResponseEntity.ok(produto);
     }
 
     @Operation(summary = "Inserir Produtos")
@@ -52,23 +61,25 @@ public class ProductController {
         return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Alterar Produtos")
+    @Operation(summary = "Alterar Produto")
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id,@RequestBody Product updatedProduct) {
 
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Produto não Encontrado"));
         existingProduct.setDescricao(updatedProduct.getDescricao());
+        existingProduct.setCompra(updatedProduct.getCompra());
+        existingProduct.setValidade(updatedProduct.getValidade());
         existingProduct.setQuantidade(updatedProduct.getQuantidade());
 
-        Product savedProduct = productRepository.save(existingProduct);
+        Product savedProduct = productRepository.saveAndFlush(existingProduct);
 
 
         return ResponseEntity.ok(savedProduct);
     }
 
 
-    @Operation(summary = "Deletar Produtos")
+    @Operation(summary = "Deletar Produto")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
